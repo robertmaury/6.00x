@@ -1,12 +1,12 @@
-x = 2
-y = 2
-z = 2
+var_x = 2
+var_y = 2
+var_z = 2
 
-if ((x > y and y > z) or (y % 2 == 0 and z % 2 == 0)) and x % 2 == 1:
+if ((var_x > var_y and var_y > var_z) or (var_y % 2 == 0 and var_z % 2 == 0)) and var_x % 2 == 1:
     print 'X is greatest'
-elif (y > z or z % 2 == 0) and y % 2 == 1:
+elif (var_y > var_z or var_z % 2 == 0) and var_y % 2 == 1:
     print 'Y is greatest'
-elif z % 2 == 1:
+elif var_z % 2 == 1:
     print 'Z is greatest'
 else:
     print 'All numbers are even'
