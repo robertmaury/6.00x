@@ -14,11 +14,13 @@ def updateHand(hand, word):
     hand: dictionary (string -> int)
     returns: dictionary (string -> int)
     """
-    newhand = ''
-    temp = {}
-    for letter in word:
-        temp[letter] = hand.get(letter, 0) + 1
-    return getFrequencyDict(newhand)
+    updated = {}
+    transword = getFrequencyDict(word)
+    for letter in hand.keys():
+        remainder = hand.get(letter,0) - transword.get(letter, 0)
+        if remainder > 0:
+            updated[letter] = remainder
+    return updated
 
 def getFrequencyDict(sequence):
     """
