@@ -15,12 +15,9 @@ def reverseString(aStr):
     aStr: a string
     returns: a reversed string
     """
-    reversed = ''
-    if len(aStr) < 1:
+    if len(aStr) <= 1:
         return aStr
-    else:
-        reversed += reverseString(aStr[:-1])
-    return reversed
+    return aStr[-1] + reverseString(aStr[:-1])
 
 #
 # Problem 4: X-ian
@@ -41,7 +38,16 @@ def x_ian(x, word):
     word: a string
     returns: True if word is x_ian, False otherwise
     """
-    ###TODO.
+    print x, word
+    if len(x) > len(word):
+        return False
+    elif x in word:
+        return True
+    elif x[0] in word:
+        return x_ian(x[1:], word[word.find(x[0]):])
+    else:
+        return x_ian(x, word[1:])
+    
 
 #
 # Problem 5: Typewriter
@@ -57,4 +63,10 @@ def insertNewlines(text, lineLength):
         the next word.
     returns: a string, with newline characters inserted appropriately. 
     """
-    ### TODO.
+    if len(text) <= lineLength:
+        return text
+    elif text[lineLength - 1] == ' ':
+        return text[:lineLength] + '\n' + insertNewlines(text[lineLength:], lineLength)
+    else:
+        offset = text[lineLength:].find(' ')
+        return text[:lineLength + offset] + '\n' + insertNewlines(text[lineLength + offset + 1:], lineLength)

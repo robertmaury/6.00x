@@ -1,18 +1,24 @@
-def reverseString(aStr):
+def insertNewlines(text, lineLength):
     """
-    Given a string, recursively returns a reversed copy of the string.
-    For example, if the string is 'abc', the function returns 'cba'.
-    The only string operations you are allowed to use are indexing,
-    slicing, and concatenation.
-    
-    aStr: a string
-    returns: a reversed string
-    """
-    reversed = ''
-    if len(aStr) == 1:
-        return aStr
-    else:
-        reversed += reverseString(aStr[1:])
-    return reversed
+    Given text and a desired line length, wrap the text as a typewriter would.
+    Insert a newline character ("\n") after each word that reaches or exceeds
+    the desired line length.
 
-print reverseString('abc')
+    text: a string containing the text to wrap.
+    line_length: the number of characters to include on a line before wrapping
+        the next word.
+    returns: a string, with newline characters inserted appropriately. 
+    """
+    wordList = text.split(' ')
+    def newLine(wordList, lineLength, text):
+        if len(text) >= lineLength:
+            return text
+        text += wordList[0] + ' '
+        return newLine(wordList[1:], lineLength, text)
+    if len(text) <= lineLength:
+        return text
+    else:
+        line = newLine(wordList, lineLength, '')
+        return line + '\n' + insertNewlines(text[len(line):], lineLength)
+    
+print insertNewlines('Random text to wrap again.', 5)
