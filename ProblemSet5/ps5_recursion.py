@@ -63,10 +63,21 @@ def insertNewlines(text, lineLength):
         the next word.
     returns: a string, with newline characters inserted appropriately. 
     """
+    #if len(text) <= lineLength:
+    #    return text
+    #elif text[lineLength - 1] == ' ':
+    #    return text[:lineLength] + '\n' + insertNewlines(text[lineLength:], lineLength)
+    #else:
+    #    offset = text[lineLength:].find(' ')
+    #    return text[:lineLength + offset] + '\n' + insertNewlines(text[lineLength + offset + 1:], lineLength)
+    wordList = text.split(' ')
+    def newLine(wordList, lineLength, text):
+        if len(text) >= lineLength:
+            return text
+        text += wordList[0] + ' '
+        return newLine(wordList[1:], lineLength, text)
     if len(text) <= lineLength:
         return text
-    elif text[lineLength - 1] == ' ':
-        return text[:lineLength] + '\n' + insertNewlines(text[lineLength:], lineLength)
     else:
-        offset = text[lineLength:].find(' ')
-        return text[:lineLength + offset] + '\n' + insertNewlines(text[lineLength + offset + 1:], lineLength)
+        line = newLine(wordList, lineLength, '')
+        return line + '\n' + insertNewlines(text[len(line):], lineLength)
